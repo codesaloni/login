@@ -1,0 +1,41 @@
+{% include 'base.html'%}
+{% block content %}
+<div class="container">
+    <h3 style="margin-top: 30px;">List of Patient</h3>
+<table class="table" style="margin-top: 50px;">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Namet</th>
+        <th scope="col">Username</th>
+        <th scope="col">email</th>
+        <th scope="col">Password</th>
+        <th scope="col">confirm password</th>
+        <th scope="col">city</th>
+        <th scope="col">state</th>
+        <th scope="col">pincode</th>
+    
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in items %}
+      <tr>
+        
+        <td>{{i.Patient_first_name}}</td>
+        <td>{{i.Patient_last_name}}</td>
+        <td>{{i.Patient_username}}</td>
+        <td>{{i.Patient_email}}</td>
+        <td>{{i.Patient_password}}</td>
+        <td>{{i.Patient_confirm_password}}</td>
+        <td>{{i.Patient_city}}</td>
+        <td>{{i.Patient_state}}</td>
+        <td>{{i.Patient_pincode}}</td>
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}
