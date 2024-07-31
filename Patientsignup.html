@@ -1,0 +1,67 @@
+{% include 'base.html'%}
+{% block content %}
+<div class="row">
+    
+    <div class="col-md-12">
+        <div class="container d-flex justify-content-center">
+            <h5 style="margin-top: 20px;">Login/Sign up:</h5>
+            <form method="POST" action="{% url 'Patient_create' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="profile" style="display: grid;">
+              <i class="fa-solid fa-user fa-2x" style="margin-left: 49%;"></i>
+              <h5 style="text-align: center;"> profile </h5>
+              <label for="profile_picture"></label>
+              <input type="file" id="profile_picture" name="profile_picture" style="margin-left: 45%;">
+            </div>
+            <div class="mb-3">
+                <label for="Patient_first_name" class="form-label">Patient First name</label>
+                <input type="text" class="form-control" id="Patient_first_name"  name="Patient_first_name" placeholder="enter the first name">
+              </div>
+              <div class="mb-3">
+                <label for="Patient_last_name" class="form-label"> Patient Last name</label>
+                <input type="text" class="form-control" id="Patient_last_name"  name="Patient_last_name" placeholder="enter the last name" >
+              </div>
+              <div class="mb-3">
+                <label for="Patient_profile_picture" class="form-label">Patient username</label>
+                <input type="text" class="form-control" id="Patient_username"  name="Patient_username" placeholder="enter the username name" >
+              </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Patient Email address</label>
+              <input type="email" class="form-control" id="Patient_email" aria-describedby="emailHelp" name="Patient_email">
+            </div>
+            <div class="message">
+              {% if messages %}
+              {% for message in messages %}
+              <h4 style="color: firebrick;">{{ message }}</h4>
+              {% endfor %}
+              {% endif %}
+          </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Patient Password</label>
+                <input type="password" class="form-control" id="Patient_password" name="Patient_password">
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Patient Confirm Password</label>
+                <input type="password" class="form-control" id="Patient_confirm_password"  name="Patient_confirm_password" placeholder="enter the password name">
+               </div>
+              <div class="mb-3" style="display: flex; gap: 20px;">
+                <label for="city" class="form-label" style="margin-top: 10px;" >Patient City</label>
+                <input type="text" class="form-control" id="Patient_city"  name="Patient_city" placeholder="city">
+              
+              
+                <label for="password" class="form-label" style="margin-top: 10px;">Patient State</label>
+                <input type="text" class="form-control" id="Patient_State"  name="Patient_state" placeholder="Patient_state">
+              
+              
+                <label for="password" class="form-label" style="margin-top: 10px;">Patient Pincode</label>
+                <input type="number" class="form-control" id="Patient_pincode"  name="Patient_pincode" placeholder="pincode">
+              </div>    
+            <button type="submit" class=" container btn btn-primary">login</button>
+          
+          </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
