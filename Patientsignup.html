@@ -8,7 +8,7 @@
         <div class="container d-flex justify-content-center">
             <h5 style="margin-top: 20px;">Login/Sign up:</h5>
             <form method="POST" action="{% url 'Patient_create' %}" enctype="multipart/form-data">
-            {% csrf_token %}
+            
             
             <div class="profile" style="display: grid;">
               <i class="fa-solid fa-user fa-2x" style="margin-left: 49%;"></i>
@@ -32,13 +32,7 @@
               <label for="exampleInputEmail1" class="form-label">Patient Email address</label>
               <input type="email" class="form-control" id="Patient_email" aria-describedby="emailHelp" name="Patient_email">
             </div>
-            <div class="message">
-              {% if messages %}
-              {% for message in messages %}
-              <h4 style="color: firebrick;">{{ message }}</h4>
-              {% endfor %}
-              {% endif %}
-          </div>
+           
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Patient Password</label>
                 <input type="password" class="form-control" id="Patient_password" name="Patient_password">
