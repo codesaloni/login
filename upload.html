@@ -1,22 +1,29 @@
-<div class="mb-3">
-                <label for="category" class="form-label">Category</label>
-                <select class="form-control" id="category" name="category">
-                    <option value="">Select a Topic</option>
-                    {% for value, label in categories %}
-                        <option value="{{ value }}">{{ label }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="post.html">creat postby doctor  </a>
+        <a class="nav-link" href="upload.html">read posts</a>
+        
+       
+      </div>
+    </div>
+  </div>
+</nav>
 <h4 style="text-align: center; margin-top: 20px;">Important post by our Doctors </h4>
 <div class="container-fluid">
     <div class="container" style="margin-top: 30px;">
-        {% for i in items %}
-        <h2 style="margin-top: 10px;">{{i.Title}}</h2>
+       
+        <h2 style="margin-top: 10px;">Mental Heatlth </h2>
         <img src="/media/{{i.Images}}" style="height: 40%; width: 30%; margin-left: 150px; margin-top: 20px;">
         <!-- <p>{{i.Summary}}</p> -->
         <p style="margin-top: 10px;">{{ i.truncated_summary }}</p>
         <p>{{i.Content}}</p>
-        {% endfor %}
+       
     </div>
 
 </div>
