@@ -1,5 +1,12 @@
-{% include 'base.html'%}
-{% block content %}
+<div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-control" id="category" name="category">
+                    <option value="">Select a Topic</option>
+                    {% for value, label in categories %}
+                        <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 <h4 style="text-align: center; margin-top: 20px;">Important post by our Doctors </h4>
 <div class="container-fluid">
     <div class="container" style="margin-top: 30px;">
@@ -15,4 +22,3 @@
 </div>
 
 
-{% endblock %}
