@@ -10,3 +10,7 @@ class DoctorAdmin(admin.ModelAdmin):
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):
     list_display=['Patient_first_name','Patient_last_name','Patient_profile_picture','Patient_username','Patient_email','Patient_password','Patient_confirm_password','Patient_city','Patient_state','Patient_pincode']
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display=['Title','Images','category','Summary','Content']

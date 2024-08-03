@@ -1,8 +1,17 @@
-from django.shortcuts import render, redirect
-from .models import Doctor,Patient
+from django.shortcuts import render, redirect,HttpResponse
+from .models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate,login as auth_login
 from django.contrib.auth import get_user_model
+
+
+CATEGORY = (
+    ('Mental health', 'Mental health'),
+    ('Heart disease', 'Heart disease'),
+    ('Covid 19', 'Covid 19'),
+    ('Immunization', 'Immunization'),
+  
+)
 
 User = get_user_model()  
 
@@ -39,7 +48,7 @@ def create_doctor(request):
         )
         user.save()
         
-        return redirect('doctor')
+        return redirect('post')
 
     return render(request, 'doctorlogin.html',{})
 
@@ -53,7 +62,7 @@ def doctor(request):
 
 
 def home(request):
-    return render(request,"home.html",{})
+    return render(request,"index.html",{})
 
 def Patient_create(request):
     if request.method == 'POST':
@@ -87,7 +96,7 @@ def Patient_create(request):
             Patient_profile_picture=Patient_profile_picture
         )
         pro.save()
-        return redirect('patient')
+        return redirect('upload')
 
     return render(request,"Patientsignup.html",{})
 
@@ -97,3 +106,46 @@ def patient(request):
         'items':items
     }
     return render(request,"patient.html",context)
+
+def post(request):
+    if request.method == 'POST':
+        title = request.POST.get('Title')
+        images = request.FILES.get('Images')
+        category = request.POST.get('category')
+        summary = request.POST.get('Summary')
+        content = request.POST.get('Content')
+        is_draft = 'is_draft' in request.POST
+
+        
+        
+        post = Post(
+            Title=title,
+            Images=images,
+            category=category,
+            Summary=summary,
+            Content=content,
+            is_draft=is_draft,
+        )
+        post.save()
+        return redirect('upload') 
+   
+
+    return render(request,"post.html",{'categories':CATEGORY})
+
+def truncate_summary(summary, word_limit=15):
+    words = summary.split()  
+    if len(words) > word_limit:
+        truncated = ' '.join(words[:word_limit])  
+        return truncated + "........ " 
+    return summary 
+
+def upload(request):
+    items=Post.objects.all()
+    for item in items:
+        item.truncated_summary = truncate_summary(item.Summary) 
+    context={
+        'items':items
+    }
+    
+
+    return render(request,"upload.html",context)

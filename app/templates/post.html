@@ -1,0 +1,62 @@
+{% include 'base.html'%}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="height: 80vh;">
+    <div class="container mt-4">
+        <h2>Create Post</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="Title">Title:</label>
+                <input type="text" class="form-control" name="Title" id="Title" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="Images">Images:</label>
+                <input type="file" class="form-control-file" name="Images" id="Images">
+            </div>
+            
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-control" id="category" name="category">
+                    <option value="">Select a Topic</option>
+                    {% for value, label in categories %}
+                        <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="Summary">Summary:</label>
+                <textarea class="form-control" name="Summary" id="Summary" rows="4" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="Content">Content:</label>
+                <textarea class="form-control" name="Content" id="Content" rows="6" required></textarea>
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="is_draft" name="is_draft">
+                <label for="is_draft" class="form-check-label">Mark as Draft</label>
+            </div>
+            <div class="button">
+            <button type="submit" class="btn btn-primary">Upload</button>
+            
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>
+
+
+{% endblock %}

@@ -6,4 +6,6 @@ urlpatterns = [
    path('doctor/',doctor,name="doctor"),
    path('patientadd/',patient,name="patient"),
    path('Patient/',Patient_create,name="Patient_create"),
+   path('post/',post,name="post"),
+   path('upload/',upload,name="upload")
 ]

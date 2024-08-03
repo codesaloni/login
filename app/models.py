@@ -1,4 +1,5 @@
 from django.db import models
+from .category import CATEGORY
 
 class Doctor(models.Model):
     first_name=models.CharField(max_length=100)
@@ -35,3 +36,16 @@ class Patient(models.Model):
 
     def __str__(self):
         return self.Patient_username
+    
+class Post(models.Model):
+    Title=models.CharField(max_length=100)
+    Images=models.ImageField(upload_to='posts/')
+    category = models.CharField(max_length=100, choices=CATEGORY, null=True)
+    Summary=models.TextField()
+    Content=models.TextField()
+    is_draft = models.BooleanField(default=False)
+
+
+
+    def __str__(self) :
+        return self.category

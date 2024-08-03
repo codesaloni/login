@@ -1,0 +1,18 @@
+{% include 'base.html'%}
+{% block content %}
+<h4 style="text-align: center; margin-top: 20px;">Important post by our Doctors </h4>
+<div class="container-fluid">
+    <div class="container" style="margin-top: 30px;">
+        {% for i in items %}
+        <h2 style="margin-top: 10px;">{{i.Title}}</h2>
+        <img src="/media/{{i.Images}}" style="height: 40%; width: 30%; margin-left: 100px; margin-top: 20px;">
+        <!-- <p>{{i.Summary}}</p> -->
+        <p style="margin-top: 10px;">{{ i.truncated_summary }}</p>
+        <p>{{i.Content}}</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+{% endblock %}
