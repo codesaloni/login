@@ -42,14 +42,13 @@
                 <input type="file" class="form-control-file" name="Images" id="Images">
             </div>
             
-            <div class="mb-3">
+           <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
                 <select class="form-control" id="category" name="category">
                     <option value="">Select a Topic</option>
-                <option value="Mental health">Mental health</option>
-                <option value="Heart disease">Heart disease</option>
-                <option value="Covid 19">Covid 19</option>
-                <option value="Immunization">Immunization</option>
+                    {% for value, label in categories %}
+                        <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
                 </select>
             </div>
             
