@@ -50,7 +50,7 @@ def create_doctor(request):
         
         return redirect('post')
 
-    return render(request, 'doctorlogin.html',{})
+    return render(request, 'dlogin.html',{})
 
 def doctor(request):
     items=Doctor.objects.all()
@@ -62,7 +62,7 @@ def doctor(request):
 
 
 def home(request):
-    return render(request,"index.html",{})
+    return render(request,"home.html",{})
 
 def Patient_create(request):
     if request.method == 'POST':
@@ -98,7 +98,7 @@ def Patient_create(request):
         pro.save()
         return redirect('upload')
 
-    return render(request,"Patientsignup.html",{})
+    return render(request,"Plogin.html",{})
 
 def patient(request):
     items=Patient.objects.all()
@@ -108,6 +108,7 @@ def patient(request):
     return render(request,"patient.html",context)
 
 def post(request):
+    
     if request.method == 'POST':
         title = request.POST.get('Title')
         images = request.FILES.get('Images')
@@ -130,7 +131,7 @@ def post(request):
         return redirect('upload') 
    
 
-    return render(request,"post.html",{'categories':CATEGORY})
+    return render(request,"post.html",{'categories':CATEGORY,})
 
 def truncate_summary(summary, word_limit=15):
     words = summary.split()  
@@ -140,7 +141,7 @@ def truncate_summary(summary, word_limit=15):
     return summary 
 
 def upload(request):
-    items=Post.objects.all()
+    items=Post.objects.filter(is_draft=False)
     for item in items:
         item.truncated_summary = truncate_summary(item.Summary) 
     context={
