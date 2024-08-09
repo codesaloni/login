@@ -1,5 +1,4 @@
-{% include 'base.html'%}
-{% block content %}
+{
 <div class="row">
     
     <div class="col-md-12">
@@ -7,7 +6,7 @@
             <h5 style="margin-top: 20px;">Login/Sign up:</h5>
             <form method="POST" action="{% url 'create_doctor' %}" enctype="multipart/form-data">
               
-            {% csrf_token %}
+            
             
             <div class="profile" style="display: grid;">
               <i class="fa-solid fa-user fa-2x" style="margin-left: 49%;"></i>
@@ -31,13 +30,7 @@
               <label for="exampleInputEmail1" class="form-label">Email address</label>
               <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="enter email address">
             </div>
-            <div class="message">
-              {% if messages %}
-              {% for message in messages %}
-              <h4 style="color: firebrick;">{{ message }}</h4>
-              {% endfor %}
-              {% endif %}
-          </div>
+            
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="enter password">
