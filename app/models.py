@@ -49,3 +49,17 @@ class Post(models.Model):
 
     def __str__(self) :
         return self.category
+
+
+
+    
+class Book_appointment(models.Model):
+    specialty = models.CharField(max_length=50)
+    appointment_date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    d = models.ForeignKey(Doctor, on_delete=models.CASCADE) 
+
+
+    def __str__(self) :
+        return self.specialty 

@@ -126,3 +126,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR/"media"
+
+
+# settings.py
+GOOGLE_API_CREDENTIALS_PATH = 'app/credentials.json'
+

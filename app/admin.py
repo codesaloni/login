@@ -14,3 +14,8 @@ class PatientAdmin(admin.ModelAdmin):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display=['Title','Images','category','Summary','Content']
+
+
+@admin.register(Book_appointment)
+class BookAdmin(admin.ModelAdmin):
+    list_display=['id','specialty','appointment_date','start_time','end_time']

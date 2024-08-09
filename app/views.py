@@ -1,8 +1,11 @@
-from django.shortcuts import render, redirect,HttpResponse
+from django.shortcuts import render, redirect,HttpResponse,get_object_or_404
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate,login as auth_login
 from django.contrib.auth import get_user_model
+from .google_calendar import create_event
+from datetime import datetime,timedelta
+
 
 
 CATEGORY = (
@@ -55,7 +58,8 @@ def create_doctor(request):
 def doctor(request):
     items=Doctor.objects.all()
     content={
-        'items':items
+        'items':items,
+        
     }
     return render(request,'doctor.html',content)
 
@@ -101,11 +105,71 @@ def Patient_create(request):
     return render(request,"Plogin.html",{})
 
 def patient(request):
-    items=Patient.objects.all()
-    context={
-        'items':items
+    doctors = Doctor.objects.all()
+
+    if request.method == 'POST':
+        # Extract data from the form
+        specialty = request.POST.get('specialty')
+        appointment_date = request.POST.get('appointment_date')
+        start_time_str = request.POST.get('start_time')
+        doctor_id = request.POST.get('d_id')
+
+        # Validate required fields
+        if not start_time_str or not doctor_id:
+            return render(request, 'patient.html', {'error': 'Start time and doctor selection are required', 'doctors': doctors})
+
+        # Combine date and time into a single datetime object
+        start_time_str = f"{appointment_date}T{start_time_str}"
+        try:
+            start_time = datetime.strptime(start_time_str, '%Y-%m-%dT%H:%M')
+        except ValueError:
+            return render(request, 'patient.html', {'error': 'Invalid date or time format', 'doctors': doctors})
+
+        # Calculate end time
+        end_time = start_time + timedelta(minutes=45)
+
+        # Validate doctor existence
+        try:
+            doctor = Doctor.objects.get(id=doctor_id)
+        except Doctor.DoesNotExist:
+            return render(request, 'patient.html', {'error': 'Selected doctor does not exist', 'doctors': doctors})
+
+        # Create new booking
+        new_booking = Book_appointment.objects.create(
+            specialty=specialty,
+            appointment_date=start_time.date(),
+            start_time=start_time.time(),
+            end_time=end_time.time(),
+            d=doctor,
+        )
+
+        # Create Google Calendar event
+        
+        create_event(start_time, end_time, specialty, doctor)
+        
+
+        # Redirect to confirmation page
+        return redirect('confirm', appointment_id=new_booking.id)
+
+    return render(request, 'patient.html', {'doctors': doctors})
+
+
+
+def Confirm(request, appointment_id):
+    item = get_object_or_404(Book_appointment, id=appointment_id)
+    context = {
+        'item': item,
     }
-    return render(request,"patient.html",context)
+    return render(request, 'appointment.html', context)
+
+def Confirm(request, appointment_id):
+   
+    item = get_object_or_404(Book_appointment, id=appointment_id)
+    context = {
+        'item': item ,
+      
+    }
+    return render(request, 'appointment.html', context)
 
 def post(request):
     
