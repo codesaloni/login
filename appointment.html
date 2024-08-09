@@ -1,0 +1,17 @@
+{% include 'base.html' %}
+{% block content %}
+<h3 style="margin-left: 80px; margin-top: 40px;">Booking Confirmed</h3>
+<div class="container" style="background-color: #f8f9fa; height: 60vh; width: 60%;margin-left: 20%; padding: 60px;">
+
+<h6><strong> Doctor Name</strong>: {{ item.d.username }}</h6>
+<h6><strong>Doctor's Specilist in</strong> : {{ item.specialty }}</h6>
+<p>Event will be stored in doctor email's google calender </p>
+<h6><strong>Date of Appointment</strong>: {{ item.appointment_date }}</h6>
+<h6><strong>Starting Time of Appointment </strong>: {{ item.start_time }}</h6>
+<h6><strong>ending Time of Appointment</strong>: {{item.end_time}}</h6>
+
+
+
+</div>
+
+{% endblock %}
