@@ -1,19 +1,16 @@
-{% include 'base.html'%}
-{% block content %}
+
 <h4 style="text-align: center; margin-top: 20px;">Important post by our Doctors </h4>
 <div class="container-fluid">
     <div class="container" style="margin-top: 30px;">
-        {% for i in items %}
+        
         <h3>Category</h3>
-        <h2 style="margin-top: 10px;">{{i.Title}}</h2>
-        <img src="/media/{{i.Images}}" style="height: 40%; width: 30%; margin-left: 150px; margin-top: 20px;">
-        <!-- <p>{{i.Summary}}</p> -->
-        <p style="margin-top: 10px;">{{ i.truncated_summary }}</p>
+        <h2 style="margin-top: 10px;">Heart disease</h2>
+        <img src="https://tse3.mm.bing.net/th?id=OIP._QPBNMR8FepZeA4l2N4e7wHaFj&pid=Api&P=0&h=180" style="height: 40%; width: 30%; margin-left: 150px; margin-top: 20px;">
        
-        {% endfor %}
+        <p style="margin-top: 10px;">The human heart is one of the most important organs responsible for sustaining life. It is a muscular organ with four chambers. The size of the heart is the size of about a clenched fist.</p>
+       
+        
     </div>
 
 </div>
 
-
-{% endblock %}
